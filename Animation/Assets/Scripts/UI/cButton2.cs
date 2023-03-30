@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class cButton2 : MonoBehaviour
+{
+    Button btn;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        btn = GetComponent<Button>();
+        btn.onClick.AddListener(OnClickBtn);
+    }
+
+    void OnClickBtn()
+    {
+        GameObject.CreatePrimitive(PrimitiveType.Sphere);   
+        Debug.Log("hello");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
