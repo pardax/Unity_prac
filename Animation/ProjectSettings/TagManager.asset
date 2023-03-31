@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Apple
   - Missile
+  - Enemy
   layers:
   - Default
   - TransparentFX
