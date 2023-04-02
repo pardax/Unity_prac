@@ -5,13 +5,22 @@ using UnityEngine;
 public class Gold : MonoBehaviour
 {
     Rigidbody2D rb;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(new Vector2(Random.Range(-50, 50), Random.Range(200, 300)));
+    }
 
-        Destroy(gameObject, 5f);
+    private void OnEnable()
+    {
+        rb.AddForce(new Vector2(Random.Range(-50, 50), Random.Range(200, 300)));
+        StartCoroutine(GoldEnd());
+    }
+
+    IEnumerator GoldEnd()
+    {
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,7 +28,7 @@ public class Gold : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             InfoManager.Instance.score += 10;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 

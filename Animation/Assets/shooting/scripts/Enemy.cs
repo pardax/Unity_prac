@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
             if(currentHP <= 0)
             {
                 InfoManager.Instance.MakeMoney(transform, Random.Range(0, 3));
+                InfoManager.Instance.MakeHpPack(transform);
                 InfoManager.Instance.score += 5;
                 InfoManager.Instance.CreateEffect(transform);
                 Destroy(gameObject);

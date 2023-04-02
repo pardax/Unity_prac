@@ -10,6 +10,7 @@ TagManager:
   - Apple
   - Missile
   - Enemy
+  - HpPack
   layers:
   - Default
   - TransparentFX
