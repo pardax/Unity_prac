@@ -15,6 +15,8 @@ public class MissileProcess : MonoBehaviour
     float interval = 0.1f;
     float coolTIme = 0f;
 
+    int score = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,14 +43,41 @@ public class MissileProcess : MonoBehaviour
         {
             if (!missilePool[i].activeSelf)
             {
-                missilePool[i].gameObject.SetActive(true);
-                missilePool[i].transform.position = transform.position + new Vector3(0, 1, 0);
-                return;
+                if(InfoManager.Instance.score >= 100)
+                {
+                    missilePool[i].gameObject.SetActive(true);
+                    missilePool[i].transform.position = transform.position + new Vector3(0.2f, 1, 0);
+                    missilePool[i+1].gameObject.SetActive(true);
+                    missilePool[i+1].transform.position = transform.position + new Vector3(-0.2f, 1, 0);
+                    return;
+                }
+                else
+                {
+                    missilePool[i].gameObject.SetActive(true);
+                    missilePool[i].transform.position = transform.position + new Vector3(0, 1, 0);
+                    return;
+                }
             }
         }
-        GameObject obj = Instantiate(missile);
-        obj.transform.position = transform.position + new Vector3(0, 1, 0);
-        obj.transform.parent = memoryPools.transform;
-        missilePool.Add(obj);
+        if(InfoManager.Instance.score >= 100)
+        {
+            GameObject obj = Instantiate(missile);
+            GameObject obj2 = Instantiate(missile);
+
+            obj.transform.position = transform.position + new Vector3(0.2f, 1, 0);
+            obj.transform.parent = memoryPools.transform;
+            obj2.transform.position = transform.position + new Vector3(-0.2f, 1, 0);
+            obj2.transform.parent = memoryPools.transform;
+            missilePool.Add(obj);
+            missilePool.Add(obj2);
+        }
+        else
+        {
+            GameObject obj = Instantiate(missile);
+
+            obj.transform.position = transform.position + new Vector3(0, 1, 0);
+            obj.transform.parent = memoryPools.transform;
+            missilePool.Add(obj);
+        }
     }
 }
